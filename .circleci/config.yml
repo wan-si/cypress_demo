@@ -1,0 +1,34 @@
+version: 2.1
+
+jobs:
+  ui-test:
+    docker:
+      - image: circleci/node:14-browsers
+    working_directory: ~/CypressDemo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - npm-{{ checksum "package-lock.json" }}
+      - run: npm install
+      - save_cache:
+          paths:
+            - ~/node_modules
+          key: npm-{{ checksum "package-lock.json" }}
+      - run: 
+          command: |
+            export CYPRESS_username=$USERNAME
+            export CYPRESS_password=$PASSWORD
+            npm run cy:run
+      - store_artifacts:
+          path: cypress/screenshots
+      - store_artifacts:
+          path: cypress/results
+      - store_artifacts:
+          path: cypress/videos          
+
+workflows:
+  version: 2
+  ui-auto-test:
+    jobs:
+      - ui-test

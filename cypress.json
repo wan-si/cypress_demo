@@ -1,0 +1,18 @@
+{
+    "baseUrl": "https://staging.test.com",
+    "chromeWebSecurity": false,
+    "defaultCommandTimeout":1000,
+    "viewportHeight": 320,
+    "viewportWidth": 568,
+    "env": {
+      "username":"",
+      "password":""
+    },
+    "reporter": "mochawesome",
+    "reporterOptions": {
+      "reportDir": "cypress/results",
+      "overwrite": false,
+      "html": true,
+      "json": false
+    }
+ }
